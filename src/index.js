@@ -4,40 +4,14 @@ import "./style.css";
 
 function App() {
   const [text, setText] = React.useState("");
-  const buttonContent = [
-    "1",
-    "2",
-    "3",
-    "=",
-
-    "4",
-    "5",
-
-    "6",
-    "/",
-
-    "7",
-    "8",
-
-    "9",
-    "*",
-    "0",
-    ".",
-
-    "C",
-
-    "AC",
-
-    "+",
-    "-",
-  ];
+  const btns = "1,2,3,=,4,5,6,/,7,8,9,*,0,.,C,AC,+,-".split(",");
   return (
     <div className="container">
       <div className="screen">
         <input className="result" type="text" disabled value={text} />
       </div>
       <div className="btns">
-        {buttonContent.map((e, index) => (
+        {btns.map((e, index) => (
           <span
             className="button"
             key={index}
