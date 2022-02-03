@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./style.css";
 
 function App() {
-  const [text, setText] = React.useState("");
+  const [result, setResult] = useState("");
+  const [n, setN] = useState(null);
+  const [op, setOp] = useState(null);
+
   const btns = "1,2,3,=,4,5,6,/,7,8,9,*,0,.,C,AC,+,-".split(",");
+
   return (
     <div className="container">
       <div className="screen">
-        <input className="result" type="text" disabled value={text} />
+        <input className="result" type="text" disabled value={result} />
       </div>
       <div className="btns">
         {btns.map((e, index) => (
@@ -19,16 +23,44 @@ function App() {
             onClick={() => {
               switch (e) {
                 case "C":
-                  setText((prevText) => prevText.slice(0, -1));
+                  setResult((prevText) => prevText.slice(0, -1));
                   break;
                 case "=":
-                  if (text !== "") setText(eval(text).toString());
+                  if (result) {
+                    const secondNumber = Number(result);
+                    setResult("");
+                    switch (op) {
+                      case "+":
+                        setResult(Number(n) + Number(secondNumber));
+                        break;
+                      case "-":
+                        setResult(Number(n) - Number(secondNumber));
+                        break;
+                      case "/":
+                        setResult(Number(n) / Number(secondNumber));
+                        break;
+                      case "*":
+                        setResult(Number(n) * Number(secondNumber));
+                        break;
+                      default:
+                    }
+                  }
                   break;
                 case "AC":
-                  setText("");
+                  setResult("");
+                  setOp(null);
+                  setN(null);
+                  break;
+                case "+":
+                case "/":
+                case "*":
+                case "-":
+                  setN(result);
+                  setOp(e);
+                  setResult("");
                   break;
                 default:
-                  setText((prev) => prev + e);
+                  setResult((prev) => prev + e);
               }
             }}
           >
