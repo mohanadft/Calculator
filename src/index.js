@@ -9,16 +9,25 @@ function App() {
     "2",
     "3",
     "=",
+
     "4",
     "5",
+
     "6",
     "/",
+
     "7",
     "8",
+
     "9",
     "*",
-    "C",
     "0",
+    ".",
+
+    "C",
+
+    "AC",
+
     "+",
     "-",
   ];
@@ -30,14 +39,23 @@ function App() {
       <div className="btns">
         {buttonContent.map((e, index) => (
           <span
-            className={isNaN(parseInt(e)) ? "operation" : "number"}
+            className="button"
             key={index}
-            onClick={(event) => {
-              if (event.target.textContent === "C")
-                setText((prevText) => prevText.slice(0, -1));
-              else if (event.target.textContent === "=")
-                setText(eval(text).toString());
-              else setText((prev) => prev + event.target.textContent);
+            type={isNaN(parseInt(e)) && e !== "." ? "operation" : "number"}
+            onClick={() => {
+              switch (e) {
+                case "C":
+                  setText((prevText) => prevText.slice(0, -1));
+                  break;
+                case "=":
+                  if (text !== "") setText(eval(text).toString());
+                  break;
+                case "AC":
+                  setText("");
+                  break;
+                default:
+                  setText((prev) => prev + e);
+              }
             }}
           >
             {e}

@@ -44,7 +44,7 @@
 }
 
 .btns {
-  height: 300px;
+  height: 340px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -76,6 +76,11 @@
   background-color: #ffffff4d;
 }
 
-.btns .operation {
+.btns span[type="operation"] {
   color: #ffa800;
+}
+
+.btns span:last-of-type,
+.btns span:nth-last-of-type(2) {
+  width: 120px;
 }
